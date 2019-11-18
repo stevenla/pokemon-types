@@ -7,38 +7,44 @@
 </script>
 
 <style>
-  div {
+  .list {
+    flex: 1 1 50%;
     display: flex;
-    flex-direction: row;
-  }
-  .from,
-  .to {
-    flex: 1 0 0px;
     flex-direction: column;
     justify-content: center;
   }
   .from {
     align-items: flex-end;
+    padding-right: 28px;
+  }
+  .to {
+    padding-left: 28px;
   }
   .modifier-list {
-    margin-bottom: 4px;
-    flex-shrink: 1;
     align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 1;
+    margin-bottom: 4px;
   }
   .modifier-list:last-of-type {
     margin: 0;
   }
   .modifier-types {
-    flex-shrink: 1;
-    max-width: calc(16px * 8);
+    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
+    flex: 1 1 0;
   }
   .from .modifier-types {
     justify-content: flex-end;
   }
 </style>
 
-<div class:from={direction === 'from'} class:to={direction === 'to'}>
+<div
+  class="list"
+  class:from={direction === 'from'}
+  class:to={direction === 'to'}>
   {#each Object.entries(typeInfo[direction]) as [modifier, typesList]}
     {#if typesList.length > 0}
       <div class="modifier-list">

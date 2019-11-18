@@ -18,7 +18,8 @@
     display: flex;
     width: 48px;
     height: 48px;
-    transition: transform 0.2s ease-out, background-color 0.1s ease-out;
+    transition: transform 0.2s ease-out, background-color 0.1s ease-out,
+      box-shadow 0.1s ease-out;
     border-radius: 50%;
     padding: 8px;
     margin: -8px;
@@ -35,7 +36,7 @@
   }
   .active {
     background-color: #fceee1;
-    box-shadow: 0 0 0 4px #fca17d;
+    box-shadow: 0 0 0 3px #fca17d;
     transform: scale(1.1);
   }
   .active.small {
