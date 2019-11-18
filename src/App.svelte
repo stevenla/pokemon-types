@@ -3,6 +3,7 @@
   import TypeIcon from "./TypeIcon.svelte";
   import ModifierText from "./ModifierText.svelte";
   import ModifierList from "./ModifierList.svelte";
+  import { active } from "./active.js";
 </script>
 
 <style>
@@ -26,7 +27,7 @@
   }
 </style>
 
-<main>
+<main on:click={() => active.set(null)}>
   {#each Object.entries(typeDatabase) as [typeName, typeInfo]}
     <div class="row">
       <ModifierList {typeInfo} direction="from" />
