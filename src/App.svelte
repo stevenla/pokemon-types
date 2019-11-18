@@ -2,86 +2,39 @@
   import typeDatabase from "./types.json";
   import TypeIcon from "./TypeIcon.svelte";
   import ModifierText from "./ModifierText.svelte";
+  import ModifierList from "./ModifierList.svelte";
 </script>
 
 <style>
   main {
-    margin-top: 16px;
+    margin-top: 20px;
   }
   div {
     display: flex;
     flex-direction: row;
   }
   .row {
-    margin-bottom: 16px;
-  }
-  .from,
-  .to {
-    flex: 1 0 0px;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .from {
-    align-items: flex-end;
-  }
-  .modifier-list {
-    padding: 0 4px;
-    margin-bottom: 2px;
-    flex-shrink: 1;
-    align-items: center;
-  }
-  .modifier-types {
-    flex-shrink: 1;
-    max-width: calc(16px * 6);
-    flex-wrap: wrap;
-  }
-  .from .modifier-types {
-    justify-content: flex-end;
-  }
-  .modifier-list:last-of-type {
-    margin: 0;
+    margin-bottom: 20px;
   }
   .type {
     flex: 0;
     margin: 0 4px;
     align-items: center;
+    flex-direction: column;
+    font-weight: bolder;
+    font-size: 10px;
   }
 </style>
 
 <main>
   {#each Object.entries(typeDatabase) as [typeName, typeInfo]}
     <div class="row">
-      <div class="from">
-        {#each Object.entries(typeInfo.from) as [modifier, typesList]}
-          {#if typesList.length > 0}
-            <div class="modifier-list">
-              <div class="modifier-types">
-                {#each typesList as modifiedType}
-                  <TypeIcon name={modifiedType} size="small" />
-                {/each}
-              </div>
-              <ModifierText {modifier} />
-            </div>
-          {/if}
-        {/each}
-      </div>
+      <ModifierList {typeInfo} direction="from" />
       <div class="type">
         <TypeIcon name={typeName} />
+        {typeName.toUpperCase()}
       </div>
-      <div class="to">
-        {#each Object.entries(typeInfo.to) as [modifier, typesList]}
-          {#if typesList.length > 0}
-            <div class="modifier-list">
-              <ModifierText {modifier} />
-              <div class="modifier-types">
-                {#each typesList as modifiedType}
-                  <TypeIcon name={modifiedType} size="small" />
-                {/each}
-              </div>
-            </div>
-          {/if}
-        {/each}
-      </div>
+      <ModifierList {typeInfo} direction="to" />
     </div>
   {/each}
 </main>

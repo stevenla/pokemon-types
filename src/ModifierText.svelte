@@ -19,14 +19,12 @@
 
 <style>
   div {
-    width: 48px;
-    height: 16px;
+    margin: 0 2px;
     font-family: monospace;
     font-weight: bolder;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* color: white; */
     font-size: 12px;
   }
   .double {
@@ -38,17 +36,8 @@
   .none {
     color: #fca17d;
   }
-  .from {
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-  }
-  .to {
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+  span {
+    margin: 0 2px;
   }
 </style>
 
@@ -56,5 +45,7 @@
   class:double={modifier === 'double'}
   class:half={modifier === 'half'}
   class:none={modifier === 'none'}>
-  - {text} →
+  <span>-</span>
+  <span>{text}</span>
+  <span>→</span>
 </div>
