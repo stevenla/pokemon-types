@@ -1,38 +1,87 @@
 <script>
-  export let name;
-  import typeInfo from "./types.json";
+  import typeDatabase from "./types.json";
   import TypeIcon from "./TypeIcon.svelte";
+  import ModifierText from "./ModifierText.svelte";
 </script>
 
 <style>
   main {
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
+    margin-top: 16px;
   }
-
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
+  div {
+    display: flex;
+    flex-direction: row;
   }
-
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
+  .row {
+    margin-bottom: 16px;
+  }
+  .from,
+  .to {
+    flex: 1 0 0px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .from {
+    align-items: flex-end;
+  }
+  .modifier-list {
+    padding: 0 4px;
+    margin-bottom: 2px;
+    flex-shrink: 1;
+    align-items: center;
+  }
+  .modifier-types {
+    flex-shrink: 1;
+    max-width: calc(16px * 6);
+    flex-wrap: wrap;
+  }
+  .from .modifier-types {
+    justify-content: flex-end;
+  }
+  .modifier-list:last-of-type {
+    margin: 0;
+  }
+  .type {
+    flex: 0;
+    margin: 0 4px;
+    align-items: center;
   }
 </style>
 
 <main>
-  <h1>Hello {name}!</h1>
-  <p>
-    Visit the
-    <a href="https://svelte.dev/tutorial">Svelte tutorial</a>
-    to learn how to build Svelte apps.
-  </p>
-  <TypeIcon name="fire" />
-
+  {#each Object.entries(typeDatabase) as [typeName, typeInfo]}
+    <div class="row">
+      <div class="from">
+        {#each Object.entries(typeInfo.from) as [modifier, typesList]}
+          {#if typesList.length > 0}
+            <div class="modifier-list">
+              <div class="modifier-types">
+                {#each typesList as modifiedType}
+                  <TypeIcon name={modifiedType} size="small" />
+                {/each}
+              </div>
+              <ModifierText {modifier} />
+            </div>
+          {/if}
+        {/each}
+      </div>
+      <div class="type">
+        <TypeIcon name={typeName} />
+      </div>
+      <div class="to">
+        {#each Object.entries(typeInfo.to) as [modifier, typesList]}
+          {#if typesList.length > 0}
+            <div class="modifier-list">
+              <ModifierText {modifier} />
+              <div class="modifier-types">
+                {#each typesList as modifiedType}
+                  <TypeIcon name={modifiedType} size="small" />
+                {/each}
+              </div>
+            </div>
+          {/if}
+        {/each}
+      </div>
+    </div>
+  {/each}
 </main>

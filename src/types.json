@@ -233,29 +233,5 @@
       "half": ["poison", "steel", "fire"],
       "none": []
     }
-  },
-  "unknown": {
-    "from": {
-      "double": [],
-      "half": [],
-      "none": []
-    },
-    "to": {
-      "double": [],
-      "half": [],
-      "none": []
-    }
-  },
-  "shadow": {
-    "from": {
-      "double": [],
-      "half": [],
-      "none": []
-    },
-    "to": {
-      "double": [],
-      "half": [],
-      "none": []
-    }
   }
 }
