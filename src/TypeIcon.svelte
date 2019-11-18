@@ -1,11 +1,15 @@
 <script>
   export let name;
   export let size = "medium";
+  export let modifier = "none";
+
   import { active } from "./active.js";
+
   let isActive;
   active.subscribe(value => {
     isActive = value === name;
   });
+
   function onClick(event) {
     active.set(name);
     event.preventDefault();
@@ -14,6 +18,10 @@
 </script>
 
 <style>
+  /*
+   * Color scheme from:
+   * https://coolors.co/f9dbbd-fca17d-da627d-9a348e-2e66aa
+   */
   .icon {
     display: flex;
     width: 48px;
@@ -21,8 +29,8 @@
     transition: transform 0.2s ease-out, background-color 0.1s ease-out,
       box-shadow 0.1s ease-out;
     border-radius: 50%;
-    padding: 8px;
-    margin: -8px;
+    padding: 4px;
+    margin: -4px;
   }
   .small {
     width: 16px;
@@ -35,17 +43,27 @@
     height: 100%;
   }
   .active {
-    background-color: #fceee1;
-    box-shadow: 0 0 0 3px #fca17d;
-    transform: scale(1.1);
+    transform: scale(1.2);
   }
-  .active.small {
+  .active.double {
+    background-color: #f8e2e7;
+    box-shadow: 0 0 0 2px #da627d;
+  }
+  .active.half {
+    background-color: #d9e3ef;
+    box-shadow: 0 0 0 2px #2e66aa;
+  }
+  .active.none {
+    background-color: #feede7;
     box-shadow: 0 0 0 2px #fca17d;
   }
 </style>
 
 <div
   class="icon"
+  class:double={modifier === 'double'}
+  class:half={modifier === 'half'}
+  class:none={modifier === 'none'}
   class:active={isActive}
   class:small={size === 'small'}
   on:click={onClick}>

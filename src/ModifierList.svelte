@@ -53,7 +53,7 @@
         {/if}
         <div class="modifier-types">
           {#each typesList as modifiedType}
-            <TypeIcon name={modifiedType} size="small" />
+            <TypeIcon {modifier} name={modifiedType} size="small" />
           {/each}
         </div>
         {#if direction === 'from'}
