@@ -1,6 +1,6 @@
 <script>
   export let typeName;
-  export let dualTypeName;
+  export let dualTypeName = null;
   export let typeInfo;
   import TypeIcon from "./TypeIcon.svelte";
   import ModifierText from "./ModifierText.svelte";
