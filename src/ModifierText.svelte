@@ -1,20 +1,18 @@
 <script>
-  export let modifier = "double";
+  export let modifier = "2";
 
-  let text = "";
-  switch (modifier) {
-    case "double":
-      text = "2";
-      break;
-    case "half":
-      text = "½";
-      break;
-    case "none":
-      text = "0";
-      break;
-    default:
-      throw new Error(`Unknown modifier ${modifier}`);
+  function getModifierDisplay(mod) {
+    switch (modifier) {
+      case "0.5":
+        return "½";
+      case "0.25":
+        return "¼";
+      default:
+        return mod;
+    }
   }
+
+  let text = getModifierDisplay(modifier);
 </script>
 
 <style>
@@ -42,9 +40,9 @@
 </style>
 
 <div
-  class:double={modifier === 'double'}
-  class:half={modifier === 'half'}
-  class:none={modifier === 'none'}>
+  class:double={modifier === '2'}
+  class:half={modifier === '0.5'}
+  class:none={modifier === '0'}>
   <span>-</span>
   <span>{text}</span>
   <span>→</span>

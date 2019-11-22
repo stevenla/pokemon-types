@@ -10,14 +10,14 @@ async function getTypeInfo(cur) {
 
   const ret = {
     from: {
-      double: relations.double_damage_from.map(({ name }) => name),
-      half: relations.half_damage_from.map(({ name }) => name),
-      none: relations.no_damage_from.map(({ name }) => name)
+      '2': relations.double_damage_from.map(({ name }) => name),
+      '0.5': relations.half_damage_from.map(({ name }) => name),
+      '0': relations.no_damage_from.map(({ name }) => name)
     },
     to: {
-      double: relations.double_damage_to.map(({ name }) => name),
-      half: relations.half_damage_to.map(({ name }) => name),
-      none: relations.no_damage_to.map(({ name }) => name)
+      '2': relations.double_damage_to.map(({ name }) => name),
+      '0.5': relations.half_damage_to.map(({ name }) => name),
+      '0': relations.no_damage_to.map(({ name }) => name)
     }
   };
   return ret;
@@ -26,7 +26,9 @@ async function getTypeInfo(cur) {
 async function getTypesList() {
   const response = await fetch('https://pokeapi.co/api/v2/type/');
   const json = await response.json();
-  return json.results.map(({ name }) => name);
+  return json.results
+    .map(({ name }) => name)
+    .filter(name => !['shadow', 'unknown'].includes(name));
 }
 
 async function main() {
@@ -41,10 +43,6 @@ async function main() {
     ret[typeName] = typeInfo;
   }
 
-  // for (const typeName of typesList) {
-  //   const typeInfo = await getTypeInfo(typeName);
-  //   ret[typeName] = typeInfo;
-  // }
   console.log(JSON.stringify(ret, null, 2));
 }
 

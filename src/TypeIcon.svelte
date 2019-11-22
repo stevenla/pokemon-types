@@ -1,7 +1,7 @@
 <script>
   export let name;
   export let size = "medium";
-  export let modifier = "none";
+  export let modifier = "0";
 
   import { active } from "./active.js";
 
@@ -61,9 +61,9 @@
 
 <div
   class="icon"
-  class:double={modifier === 'double'}
-  class:half={modifier === 'half'}
-  class:none={modifier === 'none'}
+  class:double={modifier === '2'}
+  class:half={modifier === '0.5'}
+  class:none={modifier === '0'}
   class:active={isActive}
   class:small={size === 'small'}
   on:click={onClick}>

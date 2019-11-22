@@ -4,6 +4,9 @@
 
   import TypeIcon from "./TypeIcon.svelte";
   import ModifierText from "./ModifierText.svelte";
+  const sortedTypeInfo = Object.entries(typeInfo[direction]).sort((a, b) => {
+    return -1 * (Number(a[0]) - Number(b[0]));
+  });
 </script>
 
 <style>
@@ -45,7 +48,7 @@
   class="list"
   class:from={direction === 'from'}
   class:to={direction === 'to'}>
-  {#each Object.entries(typeInfo[direction]) as [modifier, typesList]}
+  {#each sortedTypeInfo as [modifier, typesList]}
     {#if typesList.length > 0}
       <div class="modifier-list">
         {#if direction === 'to'}
