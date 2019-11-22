@@ -5,7 +5,6 @@
   import TypeIcon from "./TypeIcon.svelte";
   import ModifierText from "./ModifierText.svelte";
   import ModifierList from "./ModifierList.svelte";
-  import { active } from "./active.js";
   import { createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher();
