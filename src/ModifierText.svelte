@@ -16,6 +16,10 @@
 </script>
 
 <style>
+  /*
+   * Color scheme from:
+   * https://coolors.co/f9dbbd-fca17d-da627d-9a348e-2e66aa
+   */
   div {
     margin: 0 2px;
     font-family: monospace;
@@ -25,11 +29,17 @@
     justify-content: center;
     font-size: 12px;
   }
+  .quadruple {
+    color: #8c243a;
+  }
   .double {
     color: #da627d;
   }
   .half {
     color: #2e66aa;
+  }
+  .quarter {
+    color: #a0b9d8;
   }
   .none {
     color: #fca17d;
@@ -40,8 +50,10 @@
 </style>
 
 <div
+  class:quadruple={modifier === '4'}
   class:double={modifier === '2'}
   class:half={modifier === '0.5'}
+  class:quarter={modifier === '0.25'}
   class:none={modifier === '0'}>
   <span>-</span>
   <span>{text}</span>
