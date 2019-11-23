@@ -12,8 +12,8 @@
 
 <style>
   .row {
-    min-height: 60px;
-    margin-bottom: 20px;
+    min-height: 80px;
+    padding: 5px 0;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -67,7 +67,9 @@
           <TypeIcon size="medium" name={dualTypeName} />
         </div>
       </div>
-      {typeName.toUpperCase()} {dualTypeName.toUpperCase()}
+      {typeName.toUpperCase()}
+      <br />
+      {dualTypeName.toUpperCase()}
     {:else}
       <TypeIcon name={typeName} />
       {typeName.toUpperCase()}

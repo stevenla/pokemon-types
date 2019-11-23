@@ -2,7 +2,8 @@
   import typeDatabase from "./types.json";
   import ModifierRow from "./ModifierRow.svelte";
   import memoize from "lodash/memoize";
-  import { fly } from "svelte-transitions";
+  import { slide } from "svelte/transition";
+  import { quintIn, quintOut } from "svelte/easing";
 
   const ALL_TYPES = Object.keys(typeDatabase);
 
@@ -54,24 +55,19 @@
           "2": getMatches("from", typeName, otherName, 2),
           "4": getMatches("from", typeName, otherName, 4)
         },
-        to: {
-          "0": getMatches("to", typeName, otherName, 0),
-          "0.25": getMatches("to", typeName, otherName, 0.25),
-          "0.5": getMatches("to", typeName, otherName, 0.5),
-          "2": getMatches("to", typeName, otherName, 2),
-          "4": getMatches("to", typeName, otherName, 4)
-        }
+        to: {}
       };
       return [otherName, newInfo];
     });
     return ret;
   }
+
   $: dualTypeInfo = getDualTypes(active);
 </script>
 
 <style>
   main {
-    padding: 20px 8px 20px;
+    padding: 10px 8px;
   }
   div {
     border-radius: 10px;
@@ -80,14 +76,19 @@
   .active {
     background-color: #eee;
   }
+  .main-active {
+    background-color: #ddd;
+  }
 </style>
 
 <main>
   {#each Object.entries(typeDatabase) as [typeName, typeInfo]}
     <div class:active={active === typeName}>
-      <ModifierRow on:click={onRowClick} {typeName} {typeInfo} />
+      <div class:main-active={active === typeName}>
+        <ModifierRow on:click={onRowClick} {typeName} {typeInfo} />
+      </div>
       {#if active === typeName}
-        <div transition:fly={{ y: 100, duration: 300 }}>
+        <div in:slide={{ easing: quintIn }} out:slide={{ easing: quintOut }}>
           {#each dualTypeInfo as [dualTypeName, dualTypeInfo]}
             {#if dualTypeName !== typeName}
               <ModifierRow {typeName} {dualTypeName} typeInfo={dualTypeInfo} />
