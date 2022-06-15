@@ -30,5 +30,5 @@
   class="icon"
   class:medium={size === 'medium'}
   class:small={size === 'small'}>
-  <img src={`/icons/${name}.png`} alt={name} />
+  <img src={`icons/${name}.png`} alt={name} />
 </div>
